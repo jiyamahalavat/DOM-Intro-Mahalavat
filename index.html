@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DOM Explorer — Intro Assignment</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <div class="page-wrap">
+
+    <!-- ── Header ───────────────────────────────────────────── -->
+    <header>
+      <span class="eyebrow">Web Development I &mdash; Assignment 2</span>
+      <h1>DOM Explorer</h1>
+      <p class="subtitle">// An introduction to the Document Object Model &amp; Browser Object Model</p>
+    </header>
+
+    <!-- ── Learning Objectives ──────────────────────────────── -->
+    <section class="objectives" aria-labelledby="objectives-heading">
+      <h2 id="objectives-heading">Learning Outcomes</h2>
+      <ol>
+        <li>Create nodes and append them to a web document.</li>
+        <li>Restructure a web document by adding element nodes.</li>
+        <li>Define a timed command that repeats a function or command block at set intervals.</li>
+        <li>Work with the objects within the Browser Object Model.</li>
+      </ol>
+    </section>
+
+    <!-- ── Instructions ─────────────────────────────────────── -->
+    <main id="main-content">
+      <p style="color:var(--muted); margin-bottom:2.5rem;">
+        Open <code>script.js</code> in VS Code. Each task below contains numbered steps and a
+        sandbox area where you can see your code run live in the browser. Work through the tasks
+        in order — each one builds on the last. Use the hint dropdowns only if you get stuck.
+      </p>
+
+      <!-- ════════════════════════════════════════════════════ -->
+      <!--  TASK 1 — Create &amp; Append Nodes                 -->
+      <!-- ════════════════════════════════════════════════════ -->
+      <article class="task-card" aria-labelledby="task1-title">
+        <div class="section-label">
+          <span class="task-badge t1">Task 01</span>
+          <h2 class="task-title" id="task1-title">Create &amp; Append Nodes</h2>
+          <span class="status-badge" id="status-task1" aria-live="polite">
+            <span class="dot" aria-hidden="true"></span> not started
+          </span>
+        </div>
+
+        <p>
+          The DOM is a tree of <strong>nodes</strong>. The most common are <em>element nodes</em>
+          (like <code>&lt;p&gt;</code>) and <em>text nodes</em> (the words inside them).
+          JavaScript lets you manufacture nodes from scratch and plant them anywhere in the tree.
+        </p>
+
+        <ol class="steps">
+          <li><span>
+            Inside the <code>task1()</code> function in <code>script.js</code>, use
+            <code>document.createElement()</code> to create a <code>&lt;p&gt;</code> element.
+            Store it in a variable called <code>newPara</code>.
+          </span></li>
+          <li><span>
+            Use <code>document.createTextNode()</code> to create a text node containing
+            <em>any sentence you like</em>. Store it in <code>myText</code>.
+          </span></li>
+          <li><span>
+            Append <code>myText</code> into <code>newPara</code> using <code>.appendChild()</code>.
+          </span></li>
+          <li><span>
+            Select the sandbox below using <code>document.getElementById('sandbox-task1')</code>
+            and append <code>newPara</code> into it.
+          </span></li>
+          <li><span>
+            Call <code>markDone(1)</code> at the end of the function so the progress tracker updates.
+          </span></li>
+        </ol>
+
+        <div class="sandbox-label" aria-hidden="true">Live Output</div>
+        <div
+          class="sandbox"
+          id="sandbox-task1"
+          role="region"
+          aria-label="Task 1 live output area"
+          aria-live="polite"
+        >
+          <span class="sandbox-empty-msg">// your paragraph will appear here</span>
+        </div>
+
+        <details>
+          <summary>💡 Hint — Show me the pattern</summary>
+          <div class="hint-body">
+            <code>const el = document.createElement('p');</code>
+            <code>const txt = document.createTextNode('Hello, DOM!');</code>
+            <code>el.appendChild(txt);</code>
+            <code>document.getElementById('some-id').appendChild(el);</code>
+          </div>
+        </details>
+      </article>
+
+      <!-- ════════════════════════════════════════════════════ -->
+      <!--  TASK 2 — Restructure the Document                  -->
+      <!-- ════════════════════════════════════════════════════ -->
+      <article class="task-card" aria-labelledby="task2-title">
+        <div class="section-label">
+          <span class="task-badge t2">Task 02</span>
+          <h2 class="task-title" id="task2-title">Restructure the Document</h2>
+          <span class="status-badge" id="status-task2" aria-live="polite">
+            <span class="dot" aria-hidden="true"></span> not started
+          </span>
+        </div>
+
+        <p>
+          You can do more than just add text — you can build entire sub-trees of elements and
+          wire them together before attaching them to the live document.
+          Setting an element's <code>id</code>, <code>className</code>, or any attribute
+          via <code>.setAttribute()</code> lets you control styling and behaviour too.
+        </p>
+
+        <ol class="steps">
+          <li><span>
+            Inside <code>task2()</code>, create a <code>&lt;section&gt;</code> element and
+            store it as <code>newSection</code>.
+          </span></li>
+          <li><span>
+            Give it an <code>id</code> attribute of <code>"dynamic-section"</code> using
+            <code>.setAttribute('id', 'dynamic-section')</code>.
+          </span></li>
+          <li><span>
+            Create an <code>&lt;h3&gt;</code> element. Set its <code>textContent</code> property
+            to <code>"Built with JavaScript"</code> and append it into <code>newSection</code>.
+          </span></li>
+          <li><span>
+            Create a <code>&lt;ul&gt;</code> element. Using a loop, create <strong>three</strong>
+            <code>&lt;li&gt;</code> elements, each with different text, and append each into the list.
+            Then append the list into <code>newSection</code>.
+          </span></li>
+          <li><span>
+            Append <code>newSection</code> into <code>#sandbox-task2</code>. Call
+            <code>markDone(2)</code>.
+          </span></li>
+        </ol>
+
+        <div class="sandbox-label" aria-hidden="true">Live Output</div>
+        <div
+          class="sandbox"
+          id="sandbox-task2"
+          role="region"
+          aria-label="Task 2 live output area"
+          aria-live="polite"
+        >
+          <span class="sandbox-empty-msg">// your section will be built here</span>
+        </div>
+
+        <details>
+          <summary>💡 Hint — Loop to create list items</summary>
+          <div class="hint-body">
+            <code>const items = ['Alpha', 'Beta', 'Gamma'];</code>
+            <code>items.forEach(text => {</code>
+            <code>&nbsp;&nbsp;const li = document.createElement('li');</code>
+            <code>&nbsp;&nbsp;li.textContent = text;</code>
+            <code>&nbsp;&nbsp;ul.appendChild(li);</code>
+            <code>});</code>
+          </div>
+        </details>
+      </article>
+
+      <!-- ════════════════════════════════════════════════════ -->
+      <!--  TASK 3 — Timed Repeating Command                   -->
+      <!-- ════════════════════════════════════════════════════ -->
+      <article class="task-card" aria-labelledby="task3-title">
+        <div class="section-label">
+          <span class="task-badge t3">Task 03</span>
+          <h2 class="task-title" id="task3-title">Timed Repeating Commands</h2>
+          <span class="status-badge" id="status-task3" aria-live="polite">
+            <span class="dot" aria-hidden="true"></span> not started
+          </span>
+        </div>
+
+        <p>
+          <code>setInterval(fn, ms)</code> schedules a function to fire repeatedly every
+          <em>ms</em> milliseconds. It returns an <strong>interval ID</strong> — hold onto it
+          so you can cancel the interval with <code>clearInterval(id)</code> later.
+        </p>
+
+        <ol class="steps">
+          <li><span>
+            Find the <code>task3()</code> function. Inside, select the element with
+            <code>id="timer-display"</code> and store it.
+          </span></li>
+          <li><span>
+            Declare a variable <code>seconds</code> starting at <code>0</code>.
+          </span></li>
+          <li><span>
+            Call <code>setInterval()</code> with an <strong>arrow function</strong> that:
+            increments <code>seconds</code> by 1, then updates the display element's
+            <code>textContent</code> to show the formatted time (see hint).
+            Set the interval to <strong>1000 ms</strong>. Store the returned ID as
+            <code>intervalId</code>.
+          </span></li>
+          <li><span>
+            Wire up the <strong>Stop</strong> button in <code>stopTimer()</code>:
+            call <code>clearInterval(intervalId)</code>.
+          </span></li>
+          <li><span>
+            Wire up the <strong>Reset</strong> button in <code>resetTimer()</code>:
+            stop the interval, set <code>seconds</code> back to <code>0</code>,
+            and reset the display. Call <code>markDone(3)</code> after starting the timer.
+          </span></li>
+        </ol>
+
+        <div style="margin-top:1rem;">
+          <div class="sandbox-label" aria-hidden="true">Live Timer</div>
+          <output
+            id="timer-display"
+            aria-label="Timer display"
+            aria-live="off"
+          >00:00</output>
+          <div class="timer-controls">
+            <button class="btn btn-primary" id="btn-start" onclick="task3()">
+              ▶ Start Timer
+            </button>
+            <button class="btn btn-secondary" id="btn-stop" onclick="stopTimer()">
+              ⏹ Stop
+            </button>
+            <button class="btn btn-danger" id="btn-reset" onclick="resetTimer()">
+              ↺ Reset
+            </button>
+          </div>
+        </div>
+
+        <details>
+          <summary>💡 Hint — Formatting minutes &amp; seconds</summary>
+          <div class="hint-body">
+            <code>const mins = Math.floor(seconds / 60);</code>
+            <code>const secs = seconds % 60;</code>
+            <code>// pad with leading zero:</code>
+            <code>const display = `${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;</code>
+          </div>
+        </details>
+      </article>
+
+      <!-- ════════════════════════════════════════════════════ -->
+      <!--  TASK 4 — Browser Object Model                      -->
+      <!-- ════════════════════════════════════════════════════ -->
+      <article class="task-card" aria-labelledby="task4-title">
+        <div class="section-label">
+          <span class="task-badge t4">Task 04</span>
+          <h2 class="task-title" id="task4-title">Browser Object Model</h2>
+          <span class="status-badge" id="status-task4" aria-live="polite">
+            <span class="dot" aria-hidden="true"></span> not started
+          </span>
+        </div>
+
+        <p>
+          The <strong>Browser Object Model (BOM)</strong> is the collection of objects the browser
+          exposes to JavaScript. The top-level object is <code>window</code> — the global
+          environment. It contains child objects like <code>window.navigator</code>,
+          <code>window.location</code>, and <code>window.screen</code> that describe the
+          browser and the current page.
+        </p>
+
+        <ol class="steps">
+          <li><span>
+            Inside <code>task4()</code>, read the following BOM properties and store each in
+            a variable: <code>window.innerWidth</code>, <code>window.innerHeight</code>,
+            <code>window.navigator.language</code>, <code>window.navigator.onLine</code>,
+            and <code>window.location.href</code>.
+          </span></li>
+          <li><span>
+            Select the element <code>#bom-panel</code>. For each value, create a
+            <code>&lt;dl&gt;</code> child using the helper function
+            <code>createBomStat(label, value)</code> already defined in <code>script.js</code>,
+            and append it into <code>#bom-panel</code>.
+          </span></li>
+          <li><span>
+            <strong>Bonus:</strong> Use <code>window.addEventListener('resize', fn)</code>
+            to keep the viewport dimensions updated live as you resize the browser window.
+          </span></li>
+          <li><span>
+            Call <code>markDone(4)</code> at the end of <code>task4()</code>.
+          </span></li>
+        </ol>
+
+        <button
+          class="btn btn-primary"
+          onclick="task4()"
+          style="margin-bottom:1rem;"
+          aria-controls="bom-panel"
+        >
+          Inspect My Browser →
+        </button>
+
+        <div
+          id="bom-panel"
+          role="region"
+          aria-label="Browser Object Model properties"
+          aria-live="polite"
+        ></div>
+
+        <details>
+          <summary>💡 Hint — createBomStat helper</summary>
+          <div class="hint-body">
+            <code>// Already in script.js — call it like this:</code>
+            <code>const card = createBomStat('Viewport Width', window.innerWidth + 'px');</code>
+            <code>document.getElementById('bom-panel').appendChild(card);</code>
+          </div>
+        </details>
+      </article>
+
+      <!-- ── Reflection ────────────────────────────────────── -->
+      <hr />
+      <section aria-labelledby="reflection-heading">
+        <h2 id="reflection-heading" style="font-size:1.1rem; margin-bottom:1rem; color:var(--accent2);">
+          ✏ Reflection Questions
+        </h2>
+        <ol style="padding-left:1.25rem; display:flex; flex-direction:column; gap:.75rem; color:var(--muted);">
+          <li>What is the difference between <code>createTextNode()</code> and setting <code>textContent</code> directly? When might each be preferred?</li>
+          <li>What happens if you call <code>setInterval()</code> multiple times without storing and clearing the previous interval ID?</li>
+          <li>Why does <code>window.location.href</code> show <code>file:///</code> when you open this page directly from your file system?</li>
+          <li><strong>Challenge:</strong> Modify Task 3 so the timer counts <em>down</em> from 60 seconds and displays an alert when it hits zero.</li>
+        </ol>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ── Fixed progress tracker ───────────────────────────── -->
+  <div class="progress-bar-wrap" aria-label="Assignment progress" role="status">
+    <span>Progress</span>
+    <div class="progress-pips" aria-hidden="true">
+      <div class="pip" id="pip-1" title="Task 1"></div>
+      <div class="pip" id="pip-2" title="Task 2"></div>
+      <div class="pip" id="pip-3" title="Task 3"></div>
+      <div class="pip" id="pip-4" title="Task 4"></div>
+    </div>
+    <span id="progress-text">0 / 4</span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
