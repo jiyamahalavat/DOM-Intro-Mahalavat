@@ -67,23 +67,30 @@ function task1() {
   // TODO 1a: Create a new <p> element using document.createElement().
   //          Store it in a variable called newPara.
 
+  const newPara = document.createElement('p');
 
   // TODO 1b: Create a text node using document.createTextNode().
   //          Write any sentence you like inside it.
   //          Store it in a variable called myText.
 
+  const myText = document.createTextNode("I love making websites in JS");
 
   // TODO 1c: Append myText into newPara using .appendChild().
   //          Remember: text nodes must live inside an element node.
+
+  newPara.append(myText);
 
 
   // TODO 1d: Select the sandbox div on the page.
   //          Its id is "sandbox-task1".
   //          Append newPara into it so it appears in the browser.
 
+  const sandboxtask1 = document.getElementById("sandbox-task1");
+  sandboxtask1.append(newPara);
 
   // TODO 1e: Call markDone(1) so the progress tracker updates.
 
+  markDone(1);
 
 }
 
@@ -105,17 +112,25 @@ function task2() {
 
   // TODO 2a: Create a <section> element. Store it as newSection.
 
+  const newSection = document.createElement("section");
 
   // TODO 2b: Give newSection an id attribute of "dynamic-section".
   //          Use newSection.setAttribute('id', 'dynamic-section').
 
+  newSection.setAttribute('id', 'dynamic-section');
 
   // TODO 2c: Create an <h3> element.
   //          Set its textContent to "Built with JavaScript".
   //          Append the <h3> into newSection.
 
+  const head3 = document.createElement("h3");
+  head3.textContent = "Built with Javascript";
+  newSection.append(head3);
 
   // TODO 2d: Create a <ul> element.
+
+  const ul = document.createElement('ul')
+
   //          Use a loop (forEach, for, or for...of) to create
   //          THREE <li> elements, each with different text content.
   //          Append each <li> into the <ul>.
@@ -126,13 +141,23 @@ function task2() {
   //
   //          Your loop goes here:
 
+  for (let i = 0; i < listItems.length; i++) {
+    const li = document.createElement("li");
+    li.textContent = listItems[i];
+    ul.append(li);
+  }
+
+  newSection.append(ul);
 
   // TODO 2e: Select the sandbox (id="sandbox-task2") and
   //          append newSection into it.
 
+  const sandboxtask2 = document.getElementById("sandbox-task2");
+  sandboxtask2.append(newSection);
 
   // TODO 2f: Call markDone(2).
 
+  markDone(2);
 
 }
 
@@ -162,6 +187,8 @@ function task3() {
   // TODO 3a: Select the element with id="timer-display" and store it.
   //          You will update this element's textContent each tick.
 
+  let timerDisplay = document.getElementById("timer-display");
+
 
   // TODO 3b: Call setInterval() with an arrow function as the first argument
   //          and 1000 as the second argument (1000 ms = 1 second).
@@ -175,9 +202,21 @@ function task3() {
   //
   //          Store the return value of setInterval() in intervalId.
 
+  intervalId = setInterval(() => {
+    seconds++;
+
+    const minutes = Math.floor(seconds/60);
+    const remaining = seconds % 60;
+
+    const display = `${String(minutes).padStart(2,'0')}:${String(remaining).padStart(2,'0')}`;
+
+    timerDisplay.textContent = display
+
+  }, 1000);
 
   // TODO 3c: Call markDone(3) so the progress tracker updates.
 
+  markDone(3)
 
 }
 
@@ -192,6 +231,8 @@ function stopTimer() {
   //          knows the timer is no longer running.
 
 
+  clearInterval(intervalId);
+  intervalId = null;
 }
 
 /**
@@ -204,6 +245,10 @@ function resetTimer() {
   //          Reset the seconds variable to 0.
   //          Reset the timer-display element's textContent to "00:00".
 
+  stopTimer()
+  seconds = 0;
+
+  timerDisplay.textContent = "00:00"
 
 }
 
@@ -255,6 +300,12 @@ function task4() {
   //   window.navigator.onLine   → true if browser has internet access
   //   window.location.href      → the full URL of the current page
 
+  const viewportwidth = window.innerWidth;
+  const viewportheight = window.innerHeight;
+  const lang = window.navigator.language;
+  const internet = window.navigator.onLine;
+  const fullurl = window.location.href;
+
 
   // TODO 4b: For each property you read above, call createBomStat(label, value)
   //          to create a card, then append it into `panel`.
@@ -264,6 +315,22 @@ function task4() {
   //            panel.appendChild(widthCard);
   //
   //          Do the same for all five properties.
+ 
+  const widthCard = createBomStat('Viewport Width', viewportwidth + 'px');
+  panel.appendChild(widthCard);
+
+  const heightCard = createBomStat('Viewport Height', viewportheight + 'px');
+  panel.appendChild(heightCard);
+
+  const langCard = createBomStat('Language', lang);
+  panel.appendChild(langCard);
+
+  const internetCard = createBomStat("Internet", internet);
+  panel.appendChild(internetCard);
+
+  const fullurlCard = createBomStat("Full Url", fullurl);
+  panel.appendChild(fullurlCard);
+
 
 
   // TODO 4c: BONUS — Keep the viewport dimensions live.
@@ -278,6 +345,8 @@ function task4() {
 
   // TODO 4d: Call markDone(4).
 
+  markDone(4);
+
 
 }
 
@@ -289,4 +358,4 @@ function task4() {
 ───────────────────────────────────────────────────────────── */
 
 // BONUS TODO: Add a window resize listener here so it only fires once.
-// window.addEventListener('resize', task4);
+window.addEventListener('resize', task4);
